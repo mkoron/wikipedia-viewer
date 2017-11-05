@@ -1,14 +1,4 @@
 $(function() {
-    $('.box').mouseenter(function() {
-        $(this).animate({
-            height: '+=100px'
-        });
-    });
-    $('.box').mouseleave(function() {
-        $(this).animate({
-            height: '-=100px'
-        }); 
-    });
   
 
     $('#search').bind('keypress', function(e){
@@ -20,7 +10,17 @@ $(function() {
                 async: false,
                 dataType: 'jsonp',
                 success: function(data){
-                    console.log(data)
+                    $('.search-box').addClass('fixed');
+                    for (let i = 0; i < data[1].length; i++) {
+                        let title = data[1][i];
+                        let excerpt = data[2][i];
+                        let url = data[3][i];
+                        let article = `<li><h3>${title}</h3>
+                                            <p>${excerpt}</p>
+                                            <a href="${url}" target="blank">Go to</a>
+                                        </li>`;
+                        $('#results').append(article).fadeIn();
+                    }
                 },
                 error: function(err){
                     console.log('There has been some problems...')
