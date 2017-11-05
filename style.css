@@ -5,9 +5,9 @@
 
 .fixed {
   position: fixed !important;
-  margin-top: 20px;
+  padding-top: 20px;
   top: 0 !important;
-  transform: translate(0, 0) !important;
+  transform: translate(-50%, 0) !important;
 }
 
 .search-box {
