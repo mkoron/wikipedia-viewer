@@ -76,6 +76,7 @@ width: 300px;
 }
 
 #results li {
+  display: none;
   opacity: .3;
   position: relative;
   padding: 10px 10px;
