@@ -1,6 +1,4 @@
 $(function() {
-  
-    $('#test li').fadeIn('4000');
     $('#search').bind('keypress', function(e){
         if (e.keyCode == 13) {
             let searchTerm = $('#search').val();
@@ -10,9 +8,15 @@ $(function() {
                 async: false,
                 dataType: 'jsonp',
                 success: function(data){
-                    $('.search-box').addClass('fixed');
-                    $('#results').html('');
+                    
                     var fadeDelay = 800;
+
+                    if (!$('.search-box').hasClass('fixed'))
+                        $('.search-box').addClass('fixed');
+                    if ($('.footer').hasClass('footer-fixed'))
+                        $('.footer').removeClass('footer-fixed');
+                    
+                        $('#results').html('');
     
                     for (let i = 0; i < data[1].length; i++) {
                         let title = data[1][i];
@@ -20,9 +24,10 @@ $(function() {
                         let url = data[3][i];
                         let article = `<li>
                                             <a href="${url}" target="blank"></a>
-                                                <h3>${title}</h3>
-                                                <p>${excerpt}</p>
+                                            <h3>${title}</h3>
+                                            <p>${excerpt}</p>
                                         </li>`;
+
                         $('#results').append(article);
                         $('#results li').slideDown(fadeDelay).animate({opacity: 1});
                         fadeDelay += 50;
